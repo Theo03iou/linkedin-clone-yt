@@ -1,4 +1,5 @@
 import firebase from "firebase/compat/app";
+
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -29,9 +30,9 @@ function Login() {
 
     createUserWithEmailAndPassword(auth, email, password)
       .then((userAuth) => {
-        // userAuth.user.
-          updateProfile({
-            // displayName: name,
+        var userNow = firebase.auth().currentUser;
+        userNow.updateProfile({
+            displayName: name,
             photoURL: profilePic,
           })
           .then(() => {
@@ -39,7 +40,7 @@ function Login() {
               login({
                 email: userAuth.user.email,
                 uid: userAuth.user.uid,
-                // displayName: name,
+                displayName: name,
                 photoURL: profilePic,
               })
             );
